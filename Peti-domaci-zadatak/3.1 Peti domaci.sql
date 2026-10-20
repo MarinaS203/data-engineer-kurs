@@ -4,7 +4,7 @@ USE bootcamp.northern_star;
 /*1. Za svaku sezonu prikažite ukupan broj utakmica, ukupan broj
 postignutih golova i prosečan broj golova po utakmici.*/
 
-SELECT
+select
     season,
     count(*) as num_of_matches,
     sum(home_goals + away_goals) as num_of_goals,
@@ -17,7 +17,7 @@ SELECT
 /*2. Za svaki stadion prikažite najmanju, najveću i prosečnu zabeleženu
 posetu, kao i broj utakmica za koje je poseta poznata.*/
 
-SELECT 
+select 
     stadium_name,
     max(attendance) as max_att,
     min(attendance) as min_att,
