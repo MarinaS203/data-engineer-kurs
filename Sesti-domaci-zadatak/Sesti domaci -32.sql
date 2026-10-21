@@ -18,7 +18,8 @@ use bootcamp.northern_star;
 
 -- 2.Prikažite ime i prezime igrača i naziv kluba za koji je igrao u
 -- sezoni 2024/25. Uklonite duplikate iz rezultata.
---Iz tabele players uzimam first_name, last_name kolone, povezem players sa match_events (preko player_id), a onda povezem match_events sa matches(u kojoj je sezona, preko match_id)
+--Iz tabele players uzimam first_name, last_name kolone, povezem players sa match_events (preko player_id), 
+--a onda povezem match_events sa matches(u kojoj je sezona, preko match_id)
 --ovde je neki problem, koji ne vidim trenutno
 -- select
 -- p.first_name, p.last_name, 
@@ -49,7 +50,8 @@ order by date_of_the_game asc;
 --Srednji nivo zadataka
 -- 1.Prikažite sve utakmice za koje nije evidentiran broj gledalaca.
 -- Prikažite datum, domaći klub i gostujući klub.
---Iz tabele matches uzimam attendance=null, u istoj tabeli je kickoff_ts za datum, home_team_id, away_team_id, to treba da spojim sa tabelom teams da dobijem team name.
+--Iz tabele matches uzimam attendance=null, u istoj tabeli je kickoff_ts za datum, home_team_id, away_team_id, 
+--to treba da spojim sa tabelom teams da dobijem team name.
 
 -- select home_team_id from matches
 -- where home_team_id is null; --nema null vrednosti u ovoj koloni 
@@ -85,7 +87,9 @@ where m.stadium_id is null;
 -- 3.Za svaki klub izračunajte ukupan broj žutih kartona koje su
 -- dobili njegovi igrači u sezoni 2024/25. Rezultat sortirajte
 -- opadajuće prema broju kartona.*/
---U tabeli match_events ima event_type yellow_card i second_yellow, i ima team_id (dakle za svaki event_type ima koji tim je u njemu ucestvovao); u tabeli matches je season; mogu da povezem match_events sa teams preko team id, a matches i match_events preko match_id
+--U tabeli match_events ima event_type yellow_card i second_yellow, i ima team_id 
+--(dakle za svaki event_type ima koji tim je u njemu ucestvovao); u tabeli matches je season;
+--mogu da povezem match_events sa teams preko team id, a matches i match_events preko match_id
 -- select * from match_events;
 -- select distinct(event_type) from match_events;
 
@@ -104,7 +108,10 @@ order by total_yellow desc;
 -- Napredni nivo:
 -- 1.Pronađite pet igrača sa najvećim brojem asistencija u
 -- sezoni 2024/25. Prikažite ime igrača i broj asistencija.
--- --treba mi related_player_id iz match_events, event_type treba da bude 'goal' (moze da ima related player a moze i da bude null), season se nalazi u matches; match_events i matches mogu da povezem sa match_id, i jos mi treba ime igraca, firs_name, last_name iz players, povezem match events i players sa player id
+--treba mi related_player_id iz match_events, event_type treba da bude 'goal' 
+--(moze da ima related player a moze i da bude null), season se nalazi u matches; 
+--match_events i matches mogu da povezem sa match_id, i jos mi treba ime igraca, first_name, 
+--last_name iz players, povezem match events i players sa player id
 -- select distinct(event_type) from match_events;
 -- select * from match_events;
 select 
@@ -144,7 +151,8 @@ limit 3;
 -- samo klubove koji su imali najmanje jedno isključenje.
 -- select distinct(event_type) from match_events; --trebaju mi red_card i second_yellow da izbrojim
 -- iz match_events brojim event_type gde je red_card i second_yellow, treba mi season iz tabele matches; 
--- u tabeli match_events uz event_type ide team_id, u tabeli teams se nalazi team_name. match_events mogu preko team_id da povezem sa teams, a preko match_id sa matches
+-- u tabeli match_events uz event_type ide team_id, u tabeli teams se nalazi team_name. 
+--match_events mogu preko team_id da povezem sa teams, a preko match_id sa matches
 
 select 
 m.season, 
