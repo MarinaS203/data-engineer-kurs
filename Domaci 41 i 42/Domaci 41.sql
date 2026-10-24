@@ -67,7 +67,9 @@ order by player_id asc;
 
 --Najpre cu da proverim koji event_types su sve vrste kartona. 
 select distinct (event_type) from match_events; --Imam 'yellow_card', 'second_yellow' , 'red_card'
---Ovaj zadatak je užasno rogobatan ispao, ali kako god da sam ga radila, nisam uspevala da ga uprostim. Verujem da se može uprostiti sa nekim CT-jevima, ali nisam se snašla na taj način. Ostavila sam ispod zadatke sve nacine na koje sam pokusavala ovo da resim. Ovaj nacin mi se ne dopada baš, ali (valjda) radi ispravno. 
+--Ovaj zadatak je užasno rogobatan ispao, ali kako god da sam ga radila, nisam uspevala da ga uprostim. 
+--Verujem da se može uprostiti sa nekim CT-jevima, ali nisam se snašla na taj način. 
+--Ostavila sam ispod zadatke sve nacine na koje sam pokusavala ovo da resim. Ovaj nacin mi se ne dopada baš, ali (valjda) radi ispravno. 
 
   select match_id
   from match_events
