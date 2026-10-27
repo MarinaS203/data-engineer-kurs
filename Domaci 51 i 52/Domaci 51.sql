@@ -91,6 +91,7 @@ goals-previous_match_goals as goal_diff
 from matches1
 order by team_id, match_id, kickoff_ts; --ovo ne mora jer sam u order by kod lag stavila kickoff_ts. 
 
---Mnogo mi se dopada ovaj lag() i lead() alat, jer sam se u prethodnim domacim bas pitala da li imaju neke funkcije koje mogu da izvuku vrednosti iz prethodnih/sledecih redova. 
+--Mnogo mi se dopada ovaj lag() i lead() alat, jer sam se u prethodnim domacim bas pitala da li imaju 
+--neke funkcije koje mogu da izvuku vrednosti iz prethodnih/sledecih redova. 
 
 
