@@ -5,7 +5,8 @@
 -- jedan gol. Pomoću DENSE_RANK() rangirajte igrače prema ukupnom broju
 -- golova, od najvećeg ka najmanjem. Igrači sa istim brojem golova
 -- treba da imaju isti rang.
---U tabeli match_events imam event_type 'goal' i 'penalty_goal', treba da saberem obe vrste golova, da ih podelim u grupe na osnovu player id, uslov treba da bude da su dali bar jedan gol, i da ih rangiram po zbiru golova
+--U tabeli match_events imam event_type 'goal' i 'penalty_goal', treba da saberem obe vrste golova, 
+--da ih podelim u grupe na osnovu player id, uslov treba da bude da su dali bar jedan gol, i da ih rangiram po zbiru golova
 
 with sum_of_goals as(
 select player_id, 
@@ -21,7 +22,11 @@ order by goals_per_player desc
 select player_id, goals_per_player,
 dense_rank() over (order by goals_per_player desc) as rnk
 from sum_of_goals;
---dense_rank() over (partition by player_id order by goals_per_player desc) as rnk, ovde sam najpre uradila ovako, i izbacivalo mi je rnk=1 za svakog igraca. Onda sam ukapirala da rank rangira u okviru svake grupe koju napravim sa partition. Posto je svaki player_id po jedna grupa, svi bi u okviru svoje grupe bili rangirani kao prvi. Vidim da je to korisno npr za sledeci zadatak.
+--dense_rank() over (partition by player_id order by goals_per_player desc) as rnk, 
+--ovde sam najpre uradila ovako, i izbacivalo mi je rnk=1 za svakog igraca. 
+--Onda sam ukapirala da rank rangira u okviru svake grupe koju napravim sa partition. 
+--Posto je svaki player_id po jedna grupa, svi bi u okviru svoje grupe bili rangirani kao prvi. 
+--Vidim da je to korisno npr za sledeci zadatak.
 
 
 -- 2. Za sezonu 2024/25 prikažite tri igrača sa najviše
@@ -47,7 +52,10 @@ select
     qualify rank in (1,2,3) 
     --join sa players da bih dobila ime i prezime igrača, join sa timovima da bih dobila ime tima. uslov za sezonu sam postavila u cte-u.
     --ovde mi je bilo bas zanimljivo da mora da se vodi racuna odakle se vuce team_id za partition by. 
-    --prvo sam pomislila da je svejedno, ali kada sam uzela team_id iz players, uporno mi je vracalo kolonu null ova, jer je ta kolona u toj tabeli ustvari kolona null vrednosti. Druga stvar, u cte-u najpre nisam vadila team_id, a onda sam videla da on na osnovu rezultata iz cte-a gde su vezani igraci za timove, mora da pravi particije. 
+    --prvo sam pomislila da je svejedno, ali kada sam uzela team_id iz players,
+    --uporno mi je vracalo kolonu null ova, jer je ta kolona u toj tabeli ustvari kolona null vrednosti. 
+    --Druga stvar, u cte-u najpre nisam vadila team_id, a onda sam videla da on na osnovu rezultata iz cte-a 
+    --gde su vezani igraci za timove, mora da pravi particije. 
     --Trece, komentare pišem i za Vas i za sebe, da imam kao podsetnik gde sam sve pravila greške dok 
     --mi nije proradilo kako treba. Nadam se da nije problem što su esejskog tipa. :)
     --order by goals_per_player desc, rank desc; --i ovo je nepotrebno
