@@ -58,7 +58,8 @@ from matches
 where season='2024/25'
 qualify (lag(match_id,4) over (order by kickoff_ts is not null))
 order by kickoff_ts, match_id;
---Stavila sam ovako, uslov u qualify mu zadaje da proveri da li postoje prethodna ceitiri reda, odnosno za current row, da li je match_id u prethodna 4 reda null ili ne. Ako nije, onda pocinje da racuna proseke, zato upit vraca rezultat pocevsi od utakmice match_id=2005.
+--Stavila sam ovako, uslov u qualify mu zadaje da proveri da li postoje prethodna ceitiri reda, odnosno za current row,
+--da li je match_id u prethodna 4 reda null ili ne. Ako nije, onda pocinje da racuna proseke, zato upit vraca rezultat pocevsi od utakmice match_id=2005.
 --Da bih izracunala najvecu vrednost, spakovacu ovaj upit koji mi trazi prosecnu vrednost u cte, a onda cu da pozovem upit za max.
 with avg as(
 select 
@@ -96,14 +97,16 @@ from current_table
 where current_goals>=50
 qualify rank=1 --sada sam napravila tabelu kada je svaki tim prvi put dostigao 50 golova, bez ovog donjeg order by timovi su sortirani to team_id
 order by kickoff_ts asc; 
---kada se doda order by kickoff_ts asc, dobija se bas trazeno pitanje iz zadatka, prvi tim koji je dostigao 51 poen je tim 4, u utakmici 2212, odigranoj 18. januara 2025. godine
+--kada se doda order by kickoff_ts asc, dobija se bas trazeno pitanje iz zadatka, prvi tim koji je dostigao 51 poen je tim 4, 
+--u utakmici 2212, odigranoj 18. januara 2025. godine
 select team_name from teams where team_id=4;
 --Tim je Kingsbridge City. 
 
 -- 3. Za svaku domaću utakmicu izračunajte promenu
 -- posećenosti u odnosu na prethodnu domaću utakmicu
 -- istog kluba u istoj sezoni. Gde je najveći pad i zašto?
---U tabeli matches me interesuju samo home_team_id, po njima pravim grupe. Sortiram sve po kickoff_ts, posmatram kolonu attendance. Pošto posmatram u odnosu na prethodnu, treba mi lag funkcija. 
+--U tabeli matches me interesuju samo home_team_id, po njima pravim grupe. Sortiram sve po kickoff_ts, 
+--posmatram kolonu attendance. Pošto posmatram u odnosu na prethodnu, treba mi lag funkcija. 
 --Dakle, sortiram po vremenu utakmice, grupišem po timovima. 
 with att as(
 select
