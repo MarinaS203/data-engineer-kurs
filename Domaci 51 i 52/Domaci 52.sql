@@ -129,7 +129,7 @@ where attendance-previous_att is not null
 --Najveci pad posecenosti se dogodio u utakmici 2033, home_team_id 11, odigrano u sredu 14.9.2024., 
 --jer je promenjen stadion. Na prethodnoj utakmici je bio stadium_id 22, a na ovoj stadium_id 11.
 --Prvi stadion ima kapacitet 80000, a naredni 19500 posetilaca, zato takav pad u posecenosti. 
---Ukoliko bi nas zanimala apsolutna posecenost, a ne relativna kao ovde, trebalo bi da poredimo popunjenost kapaciteta stadiona, u procentima. 
+--Ukoliko bi nas zanimala relativna posecenost, a ne apsolutna kao ovde, trebalo bi da poredimo popunjenost kapaciteta stadiona, u procentima. 
 
 select * from stadiums where stadium_id in (11,22);
 select *from matches where home_team_id=11
