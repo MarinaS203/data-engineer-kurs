@@ -79,7 +79,8 @@ dp.position,
 round(avg(rating),2) as avg_rating
 from fact_player_match fpm
 join bootcamp.domaci.dim_players dp on dp.player_id=fpm.player_id
-where fpm.rating<>'Null' and (date_key>20240816 and date_key<20250519)
+join dim_date dd on dd.date_key=fpm.date_key
+where fpm.rating<>'Null' and dd.season='2024/25'
 group by dp.position;
 
 -- 4. Dodavanje broja golova u činjeničnu tabelu
