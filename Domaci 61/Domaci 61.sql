@@ -70,10 +70,6 @@ select rating from fact_player_match; --i u player_match_stats i u ovoj tabeli i
 --prvo cu da sredim nan vrednosti, stavicu NULL
 UPDATE fact_player_match SET rating = 'Null' WHERE rating='nan';
 
-select kickoff_ts from bootcamp.northern_star.matches where season='2024/25' order by kickoff_ts asc;
---od 2024-08-17 do 2025-05-18 traje sezona 2024/25.
-select date_key from fact_player_match; --datumi su u formatu YYYYmmDD
-
 select 
 dp.position,
 round(avg(rating),2) as avg_rating
